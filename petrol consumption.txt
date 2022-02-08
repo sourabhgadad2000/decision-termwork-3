@@ -1,0 +1,40 @@
+import pandas as pd
+data = pd.read_csv("petrol_consumption.csv")
+
+x = data.drop('Petrol_Consumption',axis='columns')
+y = data['Petrol_Consumption']
+
+import matplotlib.pyplot as plt
+#matplotlib is used to plot the decision tree
+from sklearn.datasets import load_iris
+#sklearn.datasets is used to import the dataset
+from sklearn import tree
+#sklearn tree is used to import decision tree classifier
+a = [0,1]
+ 
+def load_data_set():
+  iris = load_iris()
+  return iris
+ 
+ 
+def train_model(x, y):
+   clf = tree.DecisionTreeClassifier(criterion = "entropy")
+   #initilzing the the model with criterion entropy
+   clf = clf.fit(x,y)
+   #training the model
+   return clf
+  
+def display_image(clf, x,y):
+    plt.figure()
+    plt.figure(figsize=(40, 40))
+    tree.plot_tree(clf,filled=True)
+    plt.show()
+
+
+decision_tree_classifier = train_model(x , y)
+display_image(decision_tree_classifier, x,y )
+
+
+
+y_pred = decision_tree_classifier.predict([[9.0,3571,1976,0.525]])
+print(y_pred)

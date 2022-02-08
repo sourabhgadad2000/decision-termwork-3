@@ -1,0 +1,42 @@
+import pandas as pd
+
+
+data = pd.read_csv("BankNote_Authentication.csv")
+
+
+x = data.drop('class',axis='columns')
+y = data['class']
+
+import matplotlib.pyplot as plt
+#matplotlib is used to plot the decision tree
+
+from sklearn import tree
+#sklearn tree is used to import decision tree classifier
+a = [0,1]
+ 
+def load_data_set():
+  iris = load_iris()
+  return iris
+ 
+ 
+def train_model(x, y):
+   clf = tree.DecisionTreeClassifier(criterion = "entropy")
+   #initilzing the the model with criterion entropy
+   clf = clf.fit(x,y)
+   #training the model
+   return clf
+  
+def display_image(clf, x,y):
+    plt.figure()
+    plt.figure(figsize=(40, 40))
+    tree.plot_tree(clf,filled=True)
+    plt.show()
+
+
+decision_tree_classifier = train_model(x , y)
+display_image(decision_tree_classifier, x,y )
+
+
+y_pred = decision_tree_classifier.predict([[3.621,8.6610,-2.8073,-0.44699]])
+print(y_pred)
+
